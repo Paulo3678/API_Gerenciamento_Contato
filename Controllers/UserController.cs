@@ -2,7 +2,7 @@
 
 namespace GerenciamentoContatos.Controllers
 {
-    public class UsuariosController : ControllerBase
+    public class UserController : ControllerBase
     {
     }
 }
