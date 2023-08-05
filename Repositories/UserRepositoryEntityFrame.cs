@@ -28,6 +28,7 @@ namespace GerenciamentoContatos.Repositories
                 };
 
                 _context.Users.Add(user);
+                _context.SaveChanges();
                 return new CreatedUserDto(user);
             }
             catch (Exception)

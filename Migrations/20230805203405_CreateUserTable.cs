@@ -25,7 +25,7 @@ namespace GerenciamentoContatos.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "text", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DateOfCreation = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 8, 5, 17, 15, 27, 957, DateTimeKind.Local).AddTicks(9152))
+                    DateOfCreation = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 8, 5, 17, 34, 5, 201, DateTimeKind.Local).AddTicks(5206))
                 },
                 constraints: table =>
                 {

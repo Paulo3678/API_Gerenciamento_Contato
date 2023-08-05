@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciamentoContatos.Migrations
 {
     [DbContext(typeof(GerenciamentoContatosContext))]
-    [Migration("20230805201528_CreateUserTable")]
+    [Migration("20230805203405_CreateUserTable")]
     partial class CreateUserTable
     {
         /// <inheritdoc />
@@ -31,7 +31,7 @@ namespace GerenciamentoContatos.Migrations
                     b.Property<DateTime>("DateOfCreation")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 8, 5, 17, 15, 27, 957, DateTimeKind.Local).AddTicks(9152));
+                        .HasDefaultValue(new DateTime(2023, 8, 5, 17, 34, 5, 201, DateTimeKind.Local).AddTicks(5206));
 
                     b.Property<string>("Email")
                         .IsRequired()
