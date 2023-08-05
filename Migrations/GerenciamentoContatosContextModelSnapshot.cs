@@ -28,7 +28,7 @@ namespace GerenciamentoContatos.Migrations
                     b.Property<DateTime>("DateOfCreation")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(2023, 8, 5, 17, 15, 27, 957, DateTimeKind.Local).AddTicks(9152));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -44,7 +44,10 @@ namespace GerenciamentoContatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

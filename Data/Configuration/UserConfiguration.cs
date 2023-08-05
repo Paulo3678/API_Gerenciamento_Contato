@@ -8,6 +8,7 @@ namespace GerenciamentoContatos.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("users");
             builder
                 .Property(u => u.Name)
                 .HasColumnType("varchar(50)")
@@ -22,9 +23,11 @@ namespace GerenciamentoContatos.Data.Configuration
                 .Property(u => u.Email)
                 .HasColumnType("varchar(100)");
 
+            builder.HasIndex(u => u.Email).IsUnique();
+
             builder
                 .Property(u => u.DateOfCreation)
-                .HasDefaultValueSql("getdate()")
+                .HasDefaultValue(DateTime.Now)
                 .IsRequired();
         }
     }

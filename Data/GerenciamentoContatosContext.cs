@@ -6,7 +6,7 @@ namespace GerenciamentoContatos.Data
 {
     public class GerenciamentoContatosContext : DbContext
     {
-        public DbSet<User> Usuarios { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public GerenciamentoContatosContext(DbContextOptions opts) : base(opts)
         { }
