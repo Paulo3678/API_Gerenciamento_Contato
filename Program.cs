@@ -1,4 +1,5 @@
 using GerenciamentoContatos.Data;
+using GerenciamentoContatos.Models;
 using GerenciamentoContatos.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserRepository, UserRepositoryEntityFrame>();
+builder.Services.AddScoped<ITokenManager, JwtTokenManager>();
 
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<GerenciamentoContatosContext>(opts =>

@@ -10,10 +10,11 @@ namespace GerenciamentoContatos.Controllers;
 public class UserController : ControllerBase
 {
     private IUserRepository _repository;
-
-    public UserController(IUserRepository repository)
+    private ITokenManager _tokenManager;
+    public UserController(IUserRepository repository, ITokenManager tokenManager)
     {
         _repository = repository;
+        _tokenManager = tokenManager;
     }
 
     [HttpPost]
@@ -31,5 +32,13 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("/login")]
+    public IActionResult Login()
+    {
+        var user = _repository.GetById(new Guid("08db95f3-86c7-4ad0-8523-0dd66f4a91e8"));
+        var token = _tokenManager.Generate(user);
+
+        return Ok(token);
+    }
 
 }

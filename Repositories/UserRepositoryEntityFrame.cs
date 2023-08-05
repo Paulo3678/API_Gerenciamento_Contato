@@ -1,6 +1,7 @@
 ﻿using GerenciamentoContatos.Data;
 using GerenciamentoContatos.Data.Dtos;
 using GerenciamentoContatos.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GerenciamentoContatos.Repositories
 {
@@ -40,6 +41,14 @@ namespace GerenciamentoContatos.Repositories
         public void Remove()
         {
             throw new NotImplementedException();
+        }
+
+        public CreatedUserDto GetById(Guid id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            CreatedUserDto dto = new CreatedUserDto(user);
+
+            return dto;
         }
     }
 }
