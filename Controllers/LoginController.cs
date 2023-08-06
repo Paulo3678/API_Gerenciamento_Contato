@@ -1,5 +1,5 @@
 ﻿using GerenciamentoContatos.Data.Dtos;
-using GerenciamentoContatos.Data.Dtos.RequestErrors;
+using GerenciamentoContatos.Data.Dtos.Request;
 using GerenciamentoContatos.Models;
 using GerenciamentoContatos.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -22,23 +22,29 @@ public class LoginController : ControllerBase
     [HttpPost]
     public IActionResult Login([FromBody] UserLoginDto dto)
     {
-        var user = _repository.GetByEmailWithPassword(dto.Email);
-
-        if (!PasswordHasher.Verify(dto.Password, user.Password))
+        try
         {
-            return Unauthorized(new UnauthorizedDto().Message = "Os dados passados não são válidos");
+            var user = _repository.GetByEmailWithPassword(dto.Email);
+
+            if (!PasswordHasher.Verify(dto.Password, user.Password))
+            {
+                return Unauthorized(new UnauthorizedDto().Message = "Os dados passados não são válidos");
+            }
+
+            CreatedUserDto userDto = new CreatedUserDto()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                DateOfCreation = user.DateOfCreation
+            };
+
+            var token = _tokenManager.Generate(userDto);
+
+            return Ok(new { token = token });
         }
-
-        CreatedUserDto userDto = new CreatedUserDto()
-        {
-            Id = user.Id,
-            Email = user.Email,
-            Name = user.Name,
-            DateOfCreation = user.DateOfCreation
-        };
-
-        var token = _tokenManager.Generate(userDto);
-
-        return Ok(token);
+        catch (Exception e) {
+            return BadRequest(new { message="Usuário inválido." }) ;
+        }
     }
 }

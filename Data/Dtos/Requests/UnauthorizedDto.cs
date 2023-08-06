@@ -1,4 +1,4 @@
-﻿namespace GerenciamentoContatos.Data.Dtos.RequestErrors
+﻿namespace GerenciamentoContatos.Data.Dtos.Request
 {
     public class UnauthorizedDto
     {
