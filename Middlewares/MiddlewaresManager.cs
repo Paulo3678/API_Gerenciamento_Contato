@@ -2,7 +2,7 @@
 {
     public static class MiddlewaresManager
     {
-        // permite que você chame esse método como se fosse um método de instância da classe.
+        // Permite que você chame esse método como se fosse um método de instância da classe.
         public static void UseCustomMiddlewares(this IApplicationBuilder app)
         {
             app.Use(new AuthMiddleware().InvokeAsync);
