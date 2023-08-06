@@ -31,14 +31,4 @@ public class UserController : ControllerBase
             return BadRequest();
         }
     }
-
-    [HttpPost("/login")]
-    public IActionResult Login()
-    {
-        var user = _repository.GetById(new Guid("08db95f3-86c7-4ad0-8523-0dd66f4a91e8"));
-        var token = _tokenManager.Generate(user);
-
-        return Ok(token);
-    }
-
 }

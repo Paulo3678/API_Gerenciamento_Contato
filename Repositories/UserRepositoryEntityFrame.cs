@@ -46,8 +46,26 @@ namespace GerenciamentoContatos.Repositories
         public CreatedUserDto GetById(Guid id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (user == null) { throw new Exception("Usuário não encontrado no sistema"); }
+
             CreatedUserDto dto = new CreatedUserDto(user);
 
+            return dto;
+        }
+        public CreatedUserDto GetByEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null) { throw new Exception("Usuário não encontrado no sistema"); }
+
+            CreatedUserDto dto = new CreatedUserDto(user);
+            return dto;
+        }
+        public CreatedWithPasswordUserDto GetByEmailWithPassword(string email)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null) { throw new Exception("Usuário não encontrado no sistema"); }
+
+            CreatedWithPasswordUserDto dto = new CreatedWithPasswordUserDto(user);
             return dto;
         }
     }

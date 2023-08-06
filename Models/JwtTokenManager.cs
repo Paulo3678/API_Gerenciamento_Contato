@@ -8,6 +8,15 @@ namespace GerenciamentoContatos.Models
 {
     public class JwtTokenManager : ITokenManager
     {
+        private IConfigurationRoot _configBuilder;
+
+        public JwtTokenManager()
+        {
+            _configBuilder = new ConfigurationBuilder()
+                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build(); ;
+        }
         public void Decode()
         {
             throw new NotImplementedException();
@@ -15,7 +24,7 @@ namespace GerenciamentoContatos.Models
 
         public string Generate(CreatedUserDto dto)
         {
-            string secretKey = "9UMmL6f#g0D#cxLzYR%dBdNoY1cGO0eUEb8nH0t";
+            var secretKey = _configBuilder["TokenKey"];
 
             var claims = new[]
             {
@@ -24,21 +33,15 @@ namespace GerenciamentoContatos.Models
                 new Claim("Id", dto.Email)
             };
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Configurar a chave de segurança
-            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-            var credenciais = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
-
-            // Configurar o token
             var token = new JwtSecurityToken(
-                issuer: "seu-site.com",
-                audience: "seu-site.com",
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1), // Definir tempo de expiração
-                signingCredentials: credenciais
+                expires: DateTime.UtcNow.AddDays(1),
+                signingCredentials: credentials
             );
 
-            // Escrever o token como string
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenString;
         }
