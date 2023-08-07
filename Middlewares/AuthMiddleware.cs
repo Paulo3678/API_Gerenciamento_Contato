@@ -8,13 +8,6 @@ namespace GerenciamentoContatos.Middlewares
 {
     public class AuthMiddleware : IMiddlewareBase
     {
-        private ITokenManager _tokenManager;
-
-        public AuthMiddleware(ITokenManager tokenManager)
-        {
-            _tokenManager = tokenManager;
-        }
-
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             if (context.Request.Path != "/login")
@@ -30,7 +23,8 @@ namespace GerenciamentoContatos.Middlewares
                 return;
             }
 
-            _tokenManager.Validate();
+            JwtTokenManager tokenManager = new JwtTokenManager();
+            tokenManager.Validate();
 
             await next.Invoke(context);
         }

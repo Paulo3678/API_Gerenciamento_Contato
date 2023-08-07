@@ -3,6 +3,7 @@ using System;
 using GerenciamentoContatos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciamentoContatos.Migrations
 {
     [DbContext(typeof(GerenciamentoContatosContext))]
-    partial class GerenciamentoContatosContextModelSnapshot : ModelSnapshot
+    [Migration("20230807004040_CreateEnrollment")]
+    partial class CreateEnrollment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
