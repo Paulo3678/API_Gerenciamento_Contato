@@ -10,22 +10,30 @@ namespace GerenciamentoContatos.Middlewares
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (context.Request.Path != "/login")
+            if (context.Request.Path == "/login")
             {
-                await ReturnMessage(context, "É preciso logar para continuar");
+                await next.Invoke(context);
                 return;
             }
 
             var authHeader = context.Request.Headers["authorization"];
+            await Console.Out.WriteLineAsync();
             if (authHeader.IsNullOrEmpty())
             {
                 await ReturnMessage(context, "É preciso informar o token de acesso para continuar");
                 return;
             }
+            string token = authHeader.ToString().Replace("Bearer ", "");
 
             JwtTokenManager tokenManager = new JwtTokenManager();
-            tokenManager.Validate();
 
+            bool tokenIsValid = tokenManager.Validate(token);
+
+            if (!tokenIsValid)
+            {
+                await ReturnMessage(context, "Token inválido");
+                return;
+            }
             await next.Invoke(context);
         }
 

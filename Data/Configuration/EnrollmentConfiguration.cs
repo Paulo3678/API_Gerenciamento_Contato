@@ -16,7 +16,7 @@ public class EnrollmentConfiguration : IEntityTypeConfiguration<Enrollment>
         builder
             .Property(e => e.Observation)
             .HasColumnType("text")
-            .IsRequired();
+            .HasDefaultValue("Não informado");
 
         builder
             .Property(e => e.EnrollmentCreationDate)

@@ -56,7 +56,7 @@ namespace GerenciamentoContatos.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text")
-                        .HasDefaultValue("2023-08-06 21:40:40.8639967");
+                        .HasDefaultValue("2023-08-07 20:06:09.471169");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -67,8 +67,9 @@ namespace GerenciamentoContatos.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Observation")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("Não informado");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -107,7 +108,7 @@ namespace GerenciamentoContatos.Migrations
                     b.Property<DateTime>("DateOfCreation")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 8, 6, 21, 40, 40, 863, DateTimeKind.Local).AddTicks(9446));
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 20, 6, 9, 471, DateTimeKind.Local).AddTicks(489));
 
                     b.Property<string>("Email")
                         .IsRequired()

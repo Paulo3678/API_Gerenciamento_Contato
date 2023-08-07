@@ -46,9 +46,28 @@ namespace GerenciamentoContatos.Models
             return tokenString;
         }
 
-        public bool Validate()
+        public bool Validate(string token)
         {
-            throw new NotImplementedException();
+            var secretKey = _configBuilder["TokenKey"];
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secretKey);
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
+

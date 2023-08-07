@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GerenciamentoContatos.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateEnrollment : Migration
+    public partial class CreateEnrollmentTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace GerenciamentoContatos.Migrations
                 table: "users",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2023, 8, 6, 21, 40, 40, 863, DateTimeKind.Local).AddTicks(9446),
+                defaultValue: new DateTime(2023, 8, 7, 20, 6, 9, 471, DateTimeKind.Local).AddTicks(489),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2023, 8, 5, 17, 34, 5, 201, DateTimeKind.Local).AddTicks(5206));
@@ -26,9 +26,9 @@ namespace GerenciamentoContatos.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Observation = table.Column<string>(type: "text", nullable: false)
+                    Observation = table.Column<string>(type: "text", nullable: true, defaultValue: "Não informado")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EnrollmentCreationDate = table.Column<string>(type: "text", nullable: false, defaultValue: "2023-08-06 21:40:40.8639967")
+                    EnrollmentCreationDate = table.Column<string>(type: "text", nullable: false, defaultValue: "2023-08-07 20:06:09.471169")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -80,7 +80,7 @@ namespace GerenciamentoContatos.Migrations
                 defaultValue: new DateTime(2023, 8, 5, 17, 34, 5, 201, DateTimeKind.Local).AddTicks(5206),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 8, 6, 21, 40, 40, 863, DateTimeKind.Local).AddTicks(9446));
+                oldDefaultValue: new DateTime(2023, 8, 7, 20, 6, 9, 471, DateTimeKind.Local).AddTicks(489));
         }
     }
 }
